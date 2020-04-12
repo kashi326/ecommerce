@@ -12,7 +12,7 @@ class ItemsController extends Controller
       $item = Items::where('id','=',$id)->with([
         'user' => function($query){ $query->select('id','name','email');}
         ])->first();
-      $item->file_location = itemImagePath::where('items_id','=',$id)->get();
+      $item->file_location = itemImagePath::where('item_id','=',$id)->get();
       return view('buy')->with('item',$item);
     }
 
