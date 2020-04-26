@@ -105,9 +105,13 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
+                  {{ __('Logout') }} <i class="fa fa-sign-out"></i>
                 </a>
-
+                @if(Auth::user()->role == 2)
+                <a class="dropdown-item" href="#">Admin Dashboard <i class="fa fa-dashboard"></i></a>
+                @elseif(Auth::user()->role == 1)
+                <a class="dropdown-item" href="{{route('sellerdashboard')}}">Seller Dashboard <i class="fa fa-dashboard"></i></a>
+                @endif
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>

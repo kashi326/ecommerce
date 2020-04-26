@@ -42,3 +42,9 @@ Route::post('removeItem',function(Request $request){
   $count = session()->has('itemincart')?count(session('itemincart')):0;
   return response()->json(['data' => session('itemincart'),'count' => $count]);
 })->name('removeItem');
+
+Route::prefix('seller')->group(function(){
+  Route::get('dashboard',function(){
+    return view('seller/dashboard');
+  })->name('sellerdashboard');
+});
