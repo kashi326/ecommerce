@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\itemImagePath;
 use App\Items;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemsController extends Controller
 {
@@ -41,5 +42,22 @@ class ItemsController extends Controller
       }
 
       return response()->json(['message'=>'Item added in cart successfully','status' => 'passed','count'=> count(session()->get('itemincart'))]);
+    }
+
+    public function userProducts(){
+      $items = Items::where('user_id',Auth::user()->id)->get();
+      return view('seller/products/product')->with('products',$items);
+    }
+
+    public function addProduct(Request $request){
+      $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'instruction' => 'required',
+        'price' => 'required|integer|min:1',
+        'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'detailimages' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+      ]);
+      
     }
 }

@@ -59,7 +59,6 @@
       transition: 0.5s;
       padding-top: 60px;
     }
-
     .sidenav a {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -68,7 +67,9 @@
       display: block;
       transition: 0.3s;
     }
-
+    .sidenav a:not(:first-child){
+      border-bottom: 1px solid dimgray;
+    }
     .sidenav a:hover {
       color: gray;
     }
@@ -76,7 +77,7 @@
     .sidenav .closebtn {
       position: absolute;
       top: 0;
-      right: 25px;
+      right: 2px;
       font-size: 36px;
       margin-left: 50px;
     }
@@ -85,7 +86,6 @@
       transition: margin-left .5s;
       padding: 16px;
     }
-
     @media screen and (max-height: 450px) {
       .sidenav {
         padding-top: 15px;
@@ -140,11 +140,11 @@
       </div>
     </nav>
   </div>
-  <div id="mySidenav" class="sidenav bg-dark text-white" style="margin-top:2rem;">
+  <div id="mySidenav" class="sidenav bg-dark text-white hidden" style="margin-top:2rem;" >
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#"><img src="https://img.icons8.com/clouds/30/000000/dashboard.png"/>Dashboard</a>
-    <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/product.png"/>My Products</a>
-    <a href="#"><img src="https://img.icons8.com/plasticine/30/000000/new-product.png"/>Add Product</a>
+    <a href="{{ route('product') }}"><img src="https://img.icons8.com/bubbles/30/000000/product.png"/>My Products</a>
+    <a href="{{ route('addproduct') }}"><img src="https://img.icons8.com/plasticine/30/000000/new-product.png"/>Add Product</a>
     <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/purchase-order.png"/>Orders</a>
     <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/edit-user.png"/>Profile</a>
   </div>
