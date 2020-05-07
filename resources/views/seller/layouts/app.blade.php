@@ -31,10 +31,6 @@
       display: block;
     }
 
-    .card,
-    .card-header {
-      border-color: gray;
-    }
 
     .table-bordered,
     .table-bordered td,

@@ -35,14 +35,15 @@
                   <th>{{$value->itemDetail->price }}</th>
                   <th class="w-25"><input type="number" value="{{$value->quantity}}" class="form-control" min="1"
                       max="5"></th>
-                  <th class="w-25"><button onclick="confirmDelete({{$value->itemid}})"
-                      class="btn btn-small btn-danger">Remove</button></th>
+                  <th class="w-25"><button onclick="confirmDelete('{{ $value->itemid }}')"
+                      class="btn btn-raised btn-small btn-danger">Remove</button></th>
                 </tr>
                 @endforeach
               </form>
             </tbody>
           </table>
-          <a href="{{ route('payment') }}" class="btn btn-medium btn-primary pull-right">Confirm Order</a>
+          
+          <a href="{{ route('payment') }}" class="btn btn-raised btn-medium btn-primary pull-right">Confirm Order</a>
         </div>
       </div>
     </div>
@@ -61,8 +62,8 @@
         Are you sure, you want delete this item permanently?
       </div>
       <div class="modal-footer">
-        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-        <button class="btn btn-primary" type="button" id="removeItem">Delete</button>
+        <button data-dismiss="modal" class="btn btn-raised btn-default" type="button">Close</button>
+        <button class="btn btn-raised btn-primary" type="button" id="removeItem">Delete</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -106,10 +107,10 @@ $(document).ready(function() {
                 var tableRow = $('#itemTable');
                 $('#itemCount').html(response.count);
                 $.each(response.data, function(i, item) {
-                  var button = $('<button onclick="confirmDelete("'+item.itemid+') class = "btn btn-small btn-danger" value="Remove"/>')
+                  var button = $('<button onclick="confirmDelete("'+item.itemid+') class = "btn btn-raised btn-small btn-danger" value="Remove"/>')
                       tableRow.append('<tr><td>' + item.itemDetail.title + '</td><td>' + item.itemDetail.price +
                         '</td><td class="w-25"><input type="number" value="'+item.quantity+'" class="form-control" min="1" max="5">' 
-                        + '</td><td class = "w-25" ><button onclick="confirmDelete('+item.itemid+')"  class = "btn btn-small btn-danger">Remove</button> </td > < /tr>');
+                        + '</td><td class = "w-25" ><button onclick="confirmDelete('+item.itemid+')"  class = "btn btn-raised btn-small btn-danger">Remove</button> </td > < /tr>');
                       });
                   },
                   error: function(response) {

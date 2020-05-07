@@ -17,7 +17,8 @@ div {
     <div class="carousel-inner">
       @foreach($item->file_location as $it)
       <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-        <img src="{{ $it->file_location }}" alt="..." style="width: 100%; height:500px;">
+        <img src="{{ asset($it->file_location) }}" alt="..." style="width: 100%; height:500px;">
+        
       </div>
       @endforeach
     </div>
@@ -58,7 +59,7 @@ div {
                 </div>
               </div>
               <div class="form-group">
-                <input type="submit" id="submit" class="btn btn-small btn-info " />
+                <input type="submit" id="submit" class="btn btn-raised btn-small btn-info " />
               </div>
             </form>
           </div>

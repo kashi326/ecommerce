@@ -17,7 +17,8 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
-
+  <script src="{{ asset('js/popper.js')}}"></script>
+  
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -25,25 +26,41 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
 
   <style>
-  .dropdown:hover>.dropdown-menu {
-    display: block;
-  }
+    body {
+      font-family: "Lato", sans-serif;
+    }
 
-  .card,
-  .card-header {
-    border-color: gray;
-  }
+    a,
+    button {
+      cursor: pointer;
+    }
 
-  .table-bordered,
-  .table-bordered td,
-  .table-bordered th {
-    border: 1px solid #083c67;
-    border-bottom-color: black;
-  }
+    .form-control:focus {
+      box-shadow: none;
+      outline: none;
+    }
+
+    .dropdown:hover>.dropdown-menu {
+      display: block;
+    }
+    .card{
+      border: 1px solid #4f1921;
+    }
+    .card,
+    .card-header {
+      border-color: gray;
+    }
+
+    .table-bordered,
+    .table-bordered td,
+    .table-bordered th {
+      border: 1px solid #083c67;
+      border-bottom-color: black;
+    }
   </style>
-
 </head>
 
 <body>
@@ -53,8 +70,7 @@
         <a class="navbar-brand" href="{{ url('/') }}">
           {{ config('app.name', 'Laravel') }}
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -65,8 +81,7 @@
               <a class="nav-link" href="#"> <i class="fa fa-home"></i> Home</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="" id="categoryDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-list"></i> Categories
               </a>
               <div class="dropdown-menu" aria-labelledby="categoryDropdown">
@@ -76,9 +91,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('mycart') }}"><i class="fa fa-shopping-cart"></i> <span id="itemCount"
-                  class="badge badge-pill badge-default"
-                  id="itemCount">{{ session()->has('itemincart')?count(session()->get('itemincart')):0}}</span> My
+              <a class="nav-link" href="{{ route('mycart') }}"><i class="fa fa-shopping-cart"></i> <span id="itemCount" class="badge badge-pill badge-default" id="itemCount">{{ session()->has('itemincart')?count(session()->get('itemincart')):0}}</span> My
                 Cart</a>
             </li>
           </ul>
@@ -97,8 +110,7 @@
             @endif
             @else
             <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" v-pre>
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }} <span class="caret"></span>
               </a>
 
@@ -108,8 +120,10 @@
                   {{ __('Logout') }} <i class="fa fa-sign-out"></i>
                 </a>
                 @if(Auth::user()->role == 2)
+                <!-- role = 2 is admin -->
                 <a class="dropdown-item" href="#">Admin Dashboard <i class="fa fa-dashboard"></i></a>
                 @elseif(Auth::user()->role == 1)
+                <!-- role = 1 is seller -->
                 <a class="dropdown-item" href="{{route('sellerdashboard')}}">Seller Dashboard <i class="fa fa-dashboard"></i></a>
                 @endif
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -127,6 +141,7 @@
       @yield('content')
     </main>
   </div>
+
 </body>
 
 </html>

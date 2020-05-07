@@ -56,8 +56,39 @@ class ItemsController extends Controller
         'instruction' => 'required',
         'price' => 'required|integer|min:1',
         'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        'detailimages' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'detailimages.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
       ]);
-      
+      $thumbnail_path = '';
+      if($request->hasFile('thumbnail')){
+        $image = $request->file('thumbnail');
+        $name = $image->getClientOriginalName();
+        $image->move(public_path().'/thumbnails/',$name);
+        $thumbnail_path = 'thumbnails/'.$name;
+      }
+      $item = Items::create([
+        'title' => $request->input('title'),
+        'description' => $request->input('description'),
+        'specification' => $request->input('Specification'),
+        'instruction' => $request->input('instruction'),
+        'category' => '',
+        'thumbnail' => $thumbnail_path,
+        'price' => $request->input('price'),
+        'user_id' => Auth::user()->id
+      ]);
+      $item->save();
+
+      $data = [];
+      if($request->hasFile('detailimages')){
+        foreach($request->file('detailimages') as $image){
+          $name = $image->getClientOriginalName();
+          $image->move(public_path().'/images/',$name);
+          $imagePath =itemImagePath::create([
+            'file_location' => 'images/'.$name,
+            'item_id' => $item->id
+          ]);
+          $imagePath->save();
+        }
+      }
+      dump($data);
     }
 }

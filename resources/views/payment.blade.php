@@ -24,7 +24,7 @@
             <div class="row justify-content-center">
               <div class="col-12 col-md-5">
                 <div class="form-group">
-                  <label for="">Name on Card</label>
+                  <label for="" class="bmd-label-floating">Name on Card</label>
                   <input type="text" class="form-control" id="nameOnCard" name="nameOnCard">
                   <div id="nameOnCardError"></div>
                 </div>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-secondary w-100">Total:Rs {{$total}}</button>
+                  <button class="btn btn-raised btn-secondary w-100">Total:Rs {{$total}}</button>
                 </div>
               </div>
             </div>
@@ -83,25 +83,25 @@
             <div class="form-group form-inline">
               <label for="">Customer Name</label>
               <input type="text" name="customerName" class="form-control w-75 ml-auto" id="customerName"
-                value="{{$user->name}}">
+                value="{{ $user->name }}">
               <div id="customerNameError"></div>
             </div>
             <div class="form-group form-inline">
               <label for="">Email</label>
               <input type="text" name="customerEmail" class="form-control w-75 ml-auto" id="customerEmail"
-                value="{{$user->email}}">
+                value="{{ $user->email }}">
               <div id="customerEmailError"></div>
             </div>
             <div class="form-group form-inline">
               <label for="">Shipment Address</label>
               <input type="text" name="customerShipmentAddress" class="form-control w-75 ml-auto" id="customerAddress"
-                value="{{$user->address}}">
+                value="{{ $user->address }}">
               <div id="customerShipmentAddressError"></div>
             </div>
             <div class="form-group form-inline">
               <label for="">Contact Info</label>
               <input type="text" name="customerContact" class="form-control w-75 ml-auto" id="customerContact"
-                value="{{$user->contact}}">
+                value="{{ $user->contact }}">
               <div id="customerContactError"></div>
             </div>
           </div>
@@ -130,15 +130,15 @@
                   <tr>
                     <th>{{ $value->itemDetail->title }}</th>
                     <th>{{$value->itemDetail->price }}</th>
-                    <th class="w-25"><input type="number" value="{{$value->quantity}}"
+                    <th class="w-25"><input type="number" value="{{ $value->quantity }}"
                         class="form-control form-control-sm" min="1" max="5" disabled></th>
-                    <th>{{$value->quantity * $value->itemDetail->price}}</th>
+                    <th>{{ $value->quantity * $value->itemDetail->price }}</th>
                   </tr>
                   @endforeach
                 </form>
               </tbody>
             </table>
-            <button type="submit" class="btn btn-small btn-primary pull-right" id="checkout" value="submit">Check Out</button>
+            <button type="submit" class="btn btn-raised btn-small btn-primary pull-right" id="checkout" value="submit">Check Out</button>
           </div>
         </div>
       </div>
