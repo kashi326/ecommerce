@@ -1,8 +1,11 @@
 <?php
 
+use App\itemImagePath;
 use Illuminate\Support\Facades\Route;
 use App\Items;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -93,18 +96,41 @@ Route::prefix('seller')->middleware(['auth' => 'verified'])->group(function(){
     if(count($item) == 0){
       abort(404);
     }
-      return view('seller/products/edit')->with('product',$item);
+    return view('seller/products/edit')->with('product',$item[0]);
   })->name('edititem');
+
+  Route::put('edit/{id}','itemsController@update')->name('edititem');
   
   Route::get('remove/{id}',function($id){
-    Items::where([
-      'id'=>$id,
-      'user_id' => Auth::user()->id
-      ])->delete();
+    $images = itemImagePath::where('item_id',$id)->get();
+    //deleting Photos from storage/disk
+    foreach($images as $image){   
+      if(file_exists(public_path().'/'.$image->file_location)){
+        @unlink(public_path().'/'.$image->file_location);
+        itemImagePath::where('id',$image->id)->delete();    
+      }
+    }
+    //end
+
+    //deleting Thumbnail from storage/disk
+    $thumbnail = Items::where(['id'=>$id,'user_id' => Auth::user()->id])->first();
+    if(file_exists(public_path().'/'.$thumbnail->thumbnail)){
+      @unlink(public_path().'/'.$thumbnail->thumbnail);
+      Items::where([
+        'id'=>$id,
+        'user_id' => Auth::user()->id
+        ])->delete();
+    }
+    //end
+    //retriving updated list of Items
     $items = [];
     $items = Items::where('user_id',Auth::user()->id)->get();
-    return view('seller/products/product')->with('products',$items);
-  })->name('removeitem');  
+    return redirect()->back()->withErrors(['success'=>'Product deleted successfully']);
+  })->name('removeitem'); 
+  
+  Route::get('profile',function(){
+    return view('seller/profile/profile')->with('user',Auth::user());
+  })->name('sellerprofile');
 });
 
 //Admin Modules routes

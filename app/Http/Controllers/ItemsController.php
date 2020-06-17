@@ -65,10 +65,12 @@ class ItemsController extends Controller
         $image->move(public_path().'/thumbnails/',$name);
         $thumbnail_path = 'thumbnails/'.$name;
       }
+      $id = uniqid("",false);
       $item = Items::create([
+        'id' => $id,
         'title' => $request->input('title'),
         'description' => $request->input('description'),
-        'specification' => $request->input('Specification'),
+        'specification' => $request->input('specification'),
         'instruction' => $request->input('instruction'),
         'category' => '',
         'thumbnail' => $thumbnail_path,
@@ -76,7 +78,6 @@ class ItemsController extends Controller
         'user_id' => Auth::user()->id
       ]);
       $item->save();
-
       $data = [];
       if($request->hasFile('detailimages')){
         foreach($request->file('detailimages') as $image){
@@ -84,11 +85,15 @@ class ItemsController extends Controller
           $image->move(public_path().'/images/',$name);
           $imagePath =itemImagePath::create([
             'file_location' => 'images/'.$name,
-            'item_id' => $item->id
+            'item_id' => $id
           ]);
           $imagePath->save();
         }
       }
-      dump($data);
+      return Redirect()->back()->withErrors(['success'=>'Product added Successfully!!']);
+    }
+
+    public function update(Request $request){
+      dump($request);
     }
 }

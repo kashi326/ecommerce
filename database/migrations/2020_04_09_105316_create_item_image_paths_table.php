@@ -14,7 +14,7 @@ class CreateItemImagePathsTable extends Migration
     public function up()
     {
         Schema::create('item_image_paths', function (Blueprint $table) {
-            $table->id();
+            $table->string('id');
             $table->string('file_location');
             $table->timestamps();
         });

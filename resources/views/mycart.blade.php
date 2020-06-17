@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header">
+  <div class="card blue-gradient">
+    <div class="card-header info-card-header ">
       <h2>My Cart <i class="fa fa-cart-arrow-down"></i></h2>
     </div>
 
@@ -17,7 +17,7 @@
       <div class="row justify-content-center">
         <div class="col-8">
           <input type="text" class="form-control w-25 pull-right mb-2" id="filterItem" placeholder="Search...">
-          <table class="table table-striped table-condensed table-bordered">
+          <table class="table table-striped table-condensed">
             <thead>
               <tr>
                 <th>Title</th>
@@ -42,7 +42,6 @@
               </form>
             </tbody>
           </table>
-          
           <a href="{{ route('payment') }}" class="btn btn-raised btn-medium btn-primary pull-right">Confirm Order</a>
         </div>
       </div>

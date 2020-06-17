@@ -6,7 +6,7 @@
     @csrf
     <input type="text" value="creditCard" name="paymentMethod" id="paymentMethod" hidden>
     <div class="card">
-      <div class="card-header">
+      <div class="card-header info-card-header ">
         <h2>Payment</h2>
       </div>
       <div class="card-body">
@@ -23,40 +23,40 @@
           <div id="CreditCard" class="container tab-pane active"><br>
             <div class="row justify-content-center">
               <div class="col-12 col-md-5">
-                <div class="form-group">
-                  <label for="" class="bmd-label-floating">Name on Card</label>
+                <div class="md-form ">
+                  <label  for="" class="bmd-label-floating">Name on Card</label>
                   <input type="text" class="form-control" id="nameOnCard" name="nameOnCard">
                   <div id="nameOnCardError"></div>
                 </div>
-                <div class="form-group">
-                  <label for="">Card Number</label>
+                <div class="md-form ">
+                  <label  for="">Card Number</label>
                   <input type="number" class="form-control" id="cardNumber" name="cardNumber">
                   <div id="cardNumberError"></div>
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-4">
-                    <div class="form-group">
-                      <label for="">CVC</label>
+                    <div class="md-form ">
+                      <label  for="">CVC</label>
                       <input type="text" class="form-control" id="cvc" name="cvc">
                       <div id="cvcError"></div>
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <div class="form-group">
-                      <label for="">Expiration</label>
+                    <div class="md-form ">
+                      <label  for="">Expiration</label>
                       <input type="text" class="form-control" placeholder="MM" id="cardExpMonth" name="cardExpMonth">
                       <div id="cardExpMonthError"></div>
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <div class="form-group">
-                      <label for="">&nbsp;</label>
+                    <div class="md-form ">
+                      <label  for="">&nbsp;</label>
                       <input type="text" class="form-control" placeholder="YYYY" id="cardExpYear" name="cardExpYear">
                       <div id="cardExpYearError"></div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="md-form ">
                   <button class="btn btn-raised btn-secondary w-100">Total:Rs {{$total}}</button>
                 </div>
               </div>
@@ -74,32 +74,32 @@
       </div>
     </div>
     <div class="card mt-4">
-      <div class="card-header">
+      <div class="card-header info-card-header ">
         <h4>Shipment Detail</h4>
       </div>
       <div class="card-body">
         <div class="row  justify-content-center">
           <div class="col-md-8">
-            <div class="form-group form-inline">
-              <label for="">Customer Name</label>
+            <div class="md-form  form-inline">
+              <label  for="">Customer Name</label>
               <input type="text" name="customerName" class="form-control w-75 ml-auto" id="customerName"
                 value="{{ $user->name }}">
               <div id="customerNameError"></div>
             </div>
-            <div class="form-group form-inline">
-              <label for="">Email</label>
+            <div class="md-form  form-inline">
+              <label  for="">Email</label>
               <input type="text" name="customerEmail" class="form-control w-75 ml-auto" id="customerEmail"
                 value="{{ $user->email }}">
               <div id="customerEmailError"></div>
             </div>
-            <div class="form-group form-inline">
-              <label for="">Shipment Address</label>
+            <div class="md-form  form-inline">
+              <label  for="">Shipment Address</label>
               <input type="text" name="customerShipmentAddress" class="form-control w-75 ml-auto" id="customerAddress"
                 value="{{ $user->address }}">
               <div id="customerShipmentAddressError"></div>
             </div>
-            <div class="form-group form-inline">
-              <label for="">Contact Info</label>
+            <div class="md-form  form-inline">
+              <label  for="">Contact Info</label>
               <input type="text" name="customerContact" class="form-control w-75 ml-auto" id="customerContact"
                 value="{{ $user->contact }}">
               <div id="customerContactError"></div>
@@ -109,7 +109,7 @@
       </div>
     </div>
     <div class="card mt-4">
-      <div class="card-header">
+      <div class="card-header info-card-header ">
         <h4>Product Detail</h4>
       </div>
       <div class="card-body">

@@ -17,20 +17,33 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{ asset('js/custom.js')}}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/custom_style.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
 
   <style>
     .dropdown:hover>.dropdown-menu {
       display: block;
     }
 
+    .active {
+      line-height: normal;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      outline: none;
+    }
 
     .table-bordered,
     .table-bordered td,
@@ -55,6 +68,7 @@
       transition: 0.5s;
       padding-top: 60px;
     }
+
     .sidenav a {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -63,9 +77,11 @@
       display: block;
       transition: 0.3s;
     }
-    .sidenav a:not(:first-child){
+
+    .sidenav a:not(:first-child) {
       border-bottom: 1px solid dimgray;
     }
+
     .sidenav a:hover {
       color: gray;
     }
@@ -82,6 +98,7 @@
       transition: margin-left .5s;
       padding: 16px;
     }
+
     @media screen and (max-height: 450px) {
       .sidenav {
         padding-top: 15px;
@@ -97,7 +114,7 @@
 
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-md sticky-top shadow-sm mb-3">
       <div class="container-fluid">
         <i class="fa fa-list" onclick="openNav()" style="color:white;font-size:1.5rem;margin-right:1%;cursor:pointer;"></i>
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -115,7 +132,12 @@
 
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
-
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="theme-toggle" hidden />
+              </label>
+              <button id="switch"><img src="" id="switch-image" alt="" height="20px" width="20px" /></button>
+            </div>
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -124,7 +146,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }} <i class="fa fa-sign-out"></i>
+                  {{ __('Logout') }}<img src="{{ asset('icons/logout.svg') }}" alt="" height="20px" width="20px" /></i>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
@@ -136,13 +158,13 @@
       </div>
     </nav>
   </div>
-  <div id="mySidenav" class="sidenav bg-dark text-white hidden" style="margin-top:2rem;" >
+  <div id="mySidenav" class="sidenav bg-dark text-white hidden" style="margin-top:2rem; color:white !important;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#"><img src="https://img.icons8.com/clouds/30/000000/dashboard.png"/>Dashboard</a>
-    <a href="{{ route('product') }}"><img src="https://img.icons8.com/bubbles/30/000000/product.png"/>My Products</a>
-    <a href="{{ route('addproduct') }}"><img src="https://img.icons8.com/plasticine/30/000000/new-product.png"/>Add Product</a>
-    <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/purchase-order.png"/>Orders</a>
-    <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/edit-user.png"/>Profile</a>
+    <a href="#"><img src="https://img.icons8.com/clouds/30/000000/dashboard.png" />Dashboard</a>
+    <a href="{{ route('product') }}"><img src="https://img.icons8.com/bubbles/30/000000/product.png" />My Products</a>
+    <a href="{{ route('addproduct') }}"><img src="https://img.icons8.com/plasticine/30/000000/new-product.png" />Add Product</a>
+    <a href="#"><img src="https://img.icons8.com/bubbles/30/000000/purchase-order.png" />Orders</a>
+    <a href="{{ route('sellerprofile') }}"><img src="https://img.icons8.com/bubbles/30/000000/edit-user.png" />Profile</a>
   </div>
 
   <div id="main">
@@ -159,6 +181,7 @@
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft = "0";
     }
+    var public_path = "{{ public_path('public') }}";
   </script>
 </body>
 
